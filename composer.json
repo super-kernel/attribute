@@ -1,0 +1,20 @@
+{
+    "name": "super-kernel/attribute",
+    "description": "The attribute for super-kernel.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Attribute\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wheakerd"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.4"
+    }
+}
