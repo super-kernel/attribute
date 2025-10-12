@@ -5,11 +5,8 @@ namespace SuperKernel\Attribute;
 
 use Attribute;
 
-/**
- * @deprecated Since 1.0.3 Use {@see Provider} instead.
- */
-#[Attribute(Attribute::TARGET_CLASS)]
-final class Contract
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
+final class Provider
 {
 	public function __construct(public string $class, public int $priority = 0)
 	{
