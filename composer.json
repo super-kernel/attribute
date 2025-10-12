@@ -1,6 +1,6 @@
 {
     "name": "super-kernel/attribute",
-    "description": "The attribute for super-kernel.",
+    "description": "The attribute component for super-kernel.",
     "type": "library",
     "license": "MIT",
     "autoload": {
