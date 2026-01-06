@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace SuperKernel\Attribute;
 
-use Composer\Autoload\ClassLoader;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 use PhpParser\PhpVersion;
@@ -58,7 +57,7 @@ final class PackageCollector
 
 	private array $packages = [];
 
-	public function __construct(private readonly ClassLoader $classLoader)
+	public function __construct()
 	{
 	}
 

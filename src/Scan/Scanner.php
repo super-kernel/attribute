@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace SuperKernel\Attribute\Scan;
 
-use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
 use SuperKernel\Attribute\Contract\ScanHandlerInterface;
@@ -13,9 +12,9 @@ final readonly class Scanner
 {
 	private PackageCollector $packageCollector;
 
-	public function __construct(private ScanHandlerInterface $scanHandler, ClassLoader $classLoader)
+	public function __construct(private ScanHandlerInterface $scanHandler)
 	{
-		$this->packageCollector = new PackageCollector($classLoader);
+		$this->packageCollector = new PackageCollector();
 	}
 
 	public function scan(): AttributeCollectorInterface

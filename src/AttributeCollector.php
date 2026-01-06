@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SuperKernel\Attribute;
 
 use ReflectionAttribute;
-use SuperKernel\Attribute\Provider;
 use SuperKernel\Attribute\Constant\AttributeEnum;
 use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
 use function array_push;
@@ -15,6 +14,10 @@ use function property_exists;
 final class AttributeCollector implements AttributeCollectorInterface
 {
 	private array $attributes;
+
+	public function __construct(array $attributes)
+	{
+	}
 
 	public function setAttribute(string $class, ReflectionAttribute $reflectionAttribute): void
 	{

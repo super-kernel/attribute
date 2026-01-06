@@ -8,11 +8,9 @@
             "SuperKernel\\Attribute\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "wheakerd"
-        }
-    ],
+    "autoload-dev": {
+        "SuperKernelTest\\Attribute\\": "tests/src/"
+    },
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.4",
