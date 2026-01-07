@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SuperKernel\Attribute;
+namespace SuperKernel\Attribute\Collector;
 
 use stdClass;
 

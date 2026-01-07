@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SuperKernel\Attribute;
+namespace SuperKernel\Attribute\Collector;
 
 use ReflectionAttribute;
 use SuperKernel\Attribute\Constant\AttributeEnum;
@@ -15,7 +15,7 @@ final class AttributeCollector implements AttributeCollectorInterface
 {
 	private array $attributes;
 
-	public function __construct(array $attributes)
+	public function __construct(array $attributes = [])
 	{
 	}
 

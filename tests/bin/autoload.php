@@ -5,6 +5,4 @@ use SuperKernel\Attribute\AttributeCollectorFactory;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-var_dump(
-	new AttributeCollectorFactory()(),
-);
+new Container(new AttributeCollectorFactory()())->get(Application::class)->run();

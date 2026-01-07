@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace SuperKernel\Attribute\Contract;
 
 use ReflectionAttribute;
-use SuperKernel\Attribute\Attribute;
+use SuperKernel\Attribute\Collector\Attribute;
 use SuperKernel\Attribute\Constant\AttributeEnum;
 
 interface AttributeCollectorInterface

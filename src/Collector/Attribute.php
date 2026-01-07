@@ -1,10 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SuperKernel\Attribute;
-
-use stdClass;
-use function get_object_vars;
+namespace SuperKernel\Attribute\Collector;
 
 final readonly class Attribute
 {

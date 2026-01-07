@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace SuperKernel\Attribute\Scan;
 
 use Composer\InstalledVersions;
+use SuperKernel\Attribute\Collector\PackageCollector;
 use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
 use SuperKernel\Attribute\Contract\ScanHandlerInterface;
-use SuperKernel\Attribute\PackageCollector;
 
 final readonly class Scanner
 {
