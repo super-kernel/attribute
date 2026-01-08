@@ -37,6 +37,11 @@ final class AttributeCollector implements AttributeCollectorInterface
 		}
 	}
 
+	public function collect(\SuperKernel\Attribute\Package\Package $package): void
+	{
+
+	}
+
 	/**
 	 * @inheritDoc
 	 */

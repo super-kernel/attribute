@@ -5,16 +5,21 @@ namespace SuperKernel\Attribute\Scan;
 
 use Composer\InstalledVersions;
 use SuperKernel\Attribute\Collector\PackageCollector;
+use SuperKernel\Attribute\Collector\PackageManager;
 use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
 use SuperKernel\Attribute\Contract\ScanHandlerInterface;
 
 final readonly class Scanner
 {
-	private PackageCollector $packageCollector;
+	private ScanHandlerInterface $scanHandler;
 
-	public function __construct(private ScanHandlerInterface $scanHandler)
+	private PackageManager $packageManager;
+
+	public function __construct()
 	{
-		$this->packageCollector = new PackageCollector();
+		$this->scanHandler = new ScanHandlerFactory()();
+
+		$this->packageManager = new PackageManager();
 	}
 
 	public function scan(): AttributeCollectorInterface
@@ -23,6 +28,10 @@ final readonly class Scanner
 
 		if ($canned->isScanned()) {
 			return ($this->packageCollector)();
+		}
+
+		foreach ($this->packageManager->getPackages() as $package) {
+
 		}
 
 		foreach (InstalledVersions::getInstalledPackages() as $packageName) {

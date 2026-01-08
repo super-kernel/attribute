@@ -61,6 +61,29 @@ final class PackageCollector
 	{
 	}
 
+	public function getRootPackage()
+	{
+	}
+
+
+	public function reload()
+	{
+
+	}
+
+
+	public function addPackage(Package $package): void
+	{
+	}
+
+	public function getPackage(string $packageName): Package
+	{
+	}
+
+	public function getClassmap(): array
+	{
+	}
+
 	public function collect(string $packageName): void
 	{
 		$path = $this->packageDir . DIRECTORY_SEPARATOR . str_replace('/', '-', $packageName) . '.cache';
