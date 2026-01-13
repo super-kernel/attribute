@@ -27,4 +27,9 @@ final class Package
 			$this->{$k} = $v;
 		}
 	}
+
+	public function __destruct()
+	{
+		var_dump($this->name);
+	}
 }

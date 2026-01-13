@@ -11,10 +11,19 @@
     "autoload-dev": {
         "SuperKernelTest\\Attribute\\": "tests/src/"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=8.4",
         "ext-pcntl": "*",
         "nikic/php-parser": "^5.7"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../di"
+        }
+    ],
+    "require-dev": {
+        "super-kernel/di": "dev-main"
     }
 }

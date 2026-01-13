@@ -3,46 +3,41 @@ declare(strict_types=1);
 
 namespace SuperKernel\Attribute\Scan;
 
-use Composer\InstalledVersions;
-use SuperKernel\Attribute\Collector\PackageCollector;
-use SuperKernel\Attribute\Collector\PackageManager;
-use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
-use SuperKernel\Attribute\Contract\ScanHandlerInterface;
+use SuperKernel\Attribute\Factory\PackageFactory;
+use SuperKernel\Attribute\Package\PackageManager;
 
 final readonly class Scanner
 {
-	private ScanHandlerInterface $scanHandler;
+	private ScanConfig $scanConfig;
 
 	private PackageManager $packageManager;
 
-	public function __construct()
+	public function __construct(?ScanConfig $scanConfig = null)
 	{
-		$this->scanHandler = new ScanHandlerFactory()();
+		$this->scanConfig = $scanConfig ?? new ScanConfig();
 
-		$this->packageManager = new PackageManager();
+		$this->packageManager = new PackageManager($this->scanConfig);
 	}
 
-	public function scan(): AttributeCollectorInterface
+	public function scan(): PackageManager
 	{
-		$canned = $this->scanHandler->scan();
+		$canned = $this->scanConfig->getScanHandler()->scan();
 
 		if ($canned->isScanned()) {
-			return ($this->packageCollector)();
+			($this->packageManager)();
+			
+			return $this->packageManager;
 		}
 
-		foreach ($this->packageManager->getPackages() as $package) {
+		$composerMetadata = $this->scanConfig->getComposerMetadata();
 
+		$packageFactory = new PackageFactory();
+
+		$this->packageManager->addPackage($packageFactory($composerMetadata->root));
+
+		foreach ($composerMetadata->packages as $package) {
+			$this->packageManager->addPackage($packageFactory($package));
 		}
-
-		foreach (InstalledVersions::getInstalledPackages() as $packageName) {
-			$installPath = InstalledVersions::getInstallPath($packageName);
-
-			if ($installPath) {
-				$this->packageCollector->collect($packageName);
-			}
-		}
-
-		$this->packageCollector->scan();
 
 		exit;
 	}

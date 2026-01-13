@@ -7,11 +7,17 @@ use Exception;
 use SuperKernel\Attribute\Contract\ScanHandlerInterface;
 use SuperKernel\Attribute\Contract\ScannedInterface;
 use SuperKernel\Attribute\Scan\Scanned;
+use function extension_loaded;
 use function pcntl_fork;
 use function pcntl_wait;
 
 final class PcntlScanHandler implements ScanHandlerInterface
 {
+	public function support(): bool
+	{
+		return extension_loaded('pcntl');
+	}
+
 	/**
 	 * @return ScannedInterface
 	 * @throws Exception
