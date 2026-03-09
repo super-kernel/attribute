@@ -1,0 +1,23 @@
+{
+    "name": "super-kernel/attribute",
+    "description": "The attribute component for super-kernel.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Attribute\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SuperKernelTest\\Attribute\\": "tests/src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.4",
+        "super-kernel/annotation": "^1.0",
+        "super-kernel/composer-resolver": "^1.0",
+        "super-kernel/reflection": "^1.0"
+    }
+}
