@@ -8,16 +8,14 @@ use RuntimeException;
 use SuperKernel\Annotation\Autowired;
 use SuperKernel\Annotation\Factory;
 use SuperKernel\Annotation\Provider;
+use SuperKernel\Attribute\Attribute;
 use SuperKernel\Attribute\AttributeCollector;
 use SuperKernel\Attribute\AttributeMetadata;
 use SuperKernel\Attribute\Builder\AttributeMetadataBuilder;
-use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
-use SuperKernel\Attribute\Metadata\ClassAttribute;
-use SuperKernel\Attribute\Metadata\MethodAttribute;
-use SuperKernel\Attribute\Metadata\PropertyAttribute;
 use SuperKernel\ComposerResolver\Contract\PackageMetadataInterface;
 use SuperKernel\ComposerResolver\Factory\ScannerFactory;
 use SuperKernel\ComposerResolver\Provider\PackageMetadataRegistryProvider;
+use SuperKernel\Contract\AttributeCollectorInterface;
 use SuperKernel\PathResolver\Contract\PathResolverInterface;
 use SuperKernel\PathResolver\Provider\PathResolverProvider;
 
@@ -75,14 +73,7 @@ final class AttributeCollectorProvider
 		$content = file_get_contents($filePath);
 		if (!$content) return null;
 
-		$data = unserialize($content, [
-			'allowed_classes' => [
-				ClassAttribute::class,
-				MethodAttribute::class,
-				PropertyAttribute::class,
-				AttributeMetadata::class,
-			],
-		]);
+		$data = unserialize($content, ['allowed_classes' => [AttributeMetadata::class, Attribute::class]]);
 		return $data instanceof AttributeMetadata ? $data : null;
 	}
 
@@ -93,7 +84,7 @@ final class AttributeCollectorProvider
 			file_put_contents($filePath, serialize($metadata), LOCK_EX);
 		});
 
-		return self::loadCache($filePath) ?? throw new RuntimeException("Scan failed for {$package->getName()}");
+		return self::loadCache($filePath);
 	}
 
 	public function __invoke(): AttributeCollectorInterface
@@ -102,7 +93,10 @@ final class AttributeCollectorProvider
 			$packageMetadataRegistry = new PackageMetadataRegistryProvider()();
 			$attributesMetadata = [];
 			foreach ($packageMetadataRegistry->getPackages() as $package) {
-				$attributesMetadata[] = self::make($package);
+				$attributeMetadata = self::make($package);
+				if (null !== $attributeMetadata) {
+					$attributesMetadata[] = $attributeMetadata;
+				}
 			}
 			self::$attributeCollector = new AttributeCollector(...$attributesMetadata);
 		}

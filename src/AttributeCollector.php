@@ -4,11 +4,8 @@ declare(strict_types=1);
 namespace SuperKernel\Attribute;
 
 use Attribute;
-use SuperKernel\Attribute\Contract\AttributeCollectorInterface;
-use SuperKernel\Attribute\Contract\AttributeInterface;
-use SuperKernel\Attribute\Metadata\ClassAttribute;
-use SuperKernel\Attribute\Metadata\MethodAttribute;
-use SuperKernel\Attribute\Metadata\PropertyAttribute;
+use SuperKernel\Contract\AttributeCollectorInterface;
+use SuperKernel\Contract\AttributeInterface;
 
 final readonly class AttributeCollector implements AttributeCollectorInterface
 {
@@ -23,11 +20,11 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 		foreach ($attributesMetadata as $attributeMetadata) {
 			foreach ($attributeMetadata->getAttributes() as $attribute) {
 				$class = $attribute->getClass();
-				if ($attribute instanceof ClassAttribute) {
+				if ($attribute->compatible(AttributeInterface::TARGET_CLASS)) {
 					$attributes[$class][Attribute::TARGET_CLASS][] = $attribute;
-				} elseif ($attribute instanceof MethodAttribute) {
+				} elseif ($attribute->compatible(AttributeInterface::TARGET_METHOD)) {
 					$attributes[$class][Attribute::TARGET_METHOD][$attribute->getMethod()][] = $attribute;
-				} elseif ($attribute instanceof PropertyAttribute) {
+				} elseif ($attribute->compatible(AttributeInterface::TARGET_PROPERTY)) {
 					$attributes[$class][Attribute::TARGET_PROPERTY][$attribute->getProperty()][] = $attribute;
 				}
 			}
@@ -60,9 +57,10 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 				continue;
 			}
 
-			foreach ($targets[Attribute::TARGET_CLASS] ?? [] as $class) {
-				if ($class->getName() === $attribute) {
-					$attributes[] = $class;
+			/* @var AttributeInterface $classAttribute */
+			foreach ($targets[Attribute::TARGET_CLASS] ?? [] as $classAttribute) {
+				if ($classAttribute->getAttribute() === $attribute) {
+					$attributes[] = $classAttribute;
 				}
 			}
 		}
@@ -81,7 +79,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 
 			foreach ($targets[Attribute::TARGET_METHOD] ?? [] as $methods) {
 				foreach ($methods as $method) {
-					if ($method->getName() === $attribute) {
+					if ($method->getAttribute() === $attribute) {
 						$attributes[] = $method;
 					}
 				}
@@ -102,7 +100,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 
 			foreach ($targets[Attribute::TARGET_PROPERTY] ?? [] as $properties) {
 				foreach ($properties as $property) {
-					if ($property->getName() === $attribute) {
+					if ($property->getAttribute() === $attribute) {
 						$attributes[] = $property;
 					}
 				}

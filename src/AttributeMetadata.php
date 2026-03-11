@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SuperKernel\Attribute;
 
-use SuperKernel\Attribute\Contract\AttributeInterface;
+use SuperKernel\Contract\AttributeInterface;
 
 final readonly class AttributeMetadata
 {
