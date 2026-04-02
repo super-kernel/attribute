@@ -18,13 +18,13 @@
             "SuperKernel\\Attribute\\": "src/"
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "config": {
         "classmap-authoritative": true,
         "optimize-autoloader": true,
         "sort-packages": true
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "php": "~8.4.0"
     }
