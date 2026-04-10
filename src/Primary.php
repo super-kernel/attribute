@@ -6,9 +6,6 @@ namespace SuperKernel\Attribute;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_CLASS)]
-final readonly class Factory
+final class Primary
 {
-	public function __construct()
-	{
-	}
 }

@@ -6,7 +6,7 @@ namespace SuperKernel\Attribute;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_PROPERTY)]
-final readonly class Autowired
+final readonly class Inject
 {
 	public function __construct(public ?string $class = null)
 	{
