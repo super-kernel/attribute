@@ -6,9 +6,9 @@ namespace SuperKernel\Attribute;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_CLASS)]
-final readonly class FactoryNode
+final readonly class Order
 {
-	public function __construct(public string $class, public string $method = '__invoke')
+	public function __construct(public int $value)
 	{
 	}
 }
