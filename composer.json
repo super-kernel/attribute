@@ -1,0 +1,31 @@
+{
+    "name": "super-kernel/attribute",
+    "description": "Native PHP Attribute contracts for configuration, DI, events, and third-party integrations.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.4.27 <8.5"
+    },
+    "suggest": {
+        "super-kernel/config": "Collects and resolves Configuration declarations."
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95.27",
+        "phpunit/phpunit": "^13.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "SuperKernel\\Attribute\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SuperKernel\\Attribute\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "format": "@php vendor/bin/php-cs-fixer fix --show-progress=bar --no-ansi",
+        "format:check": "@php vendor/bin/php-cs-fixer check --show-progress=bar --no-ansi --diff",
+        "test": "@php vendor/bin/phpunit"
+    }
+}
